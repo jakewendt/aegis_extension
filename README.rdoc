@@ -1,0 +1,28 @@
+= Mods of Aegis
+
+	This rails plugin includes modifications to the Aegis gem.
+
+== What modifications?
+
+Rails 2.3.4 throws 
+
+	DEPRECATION WARNING: ActiveRecord::Errors.default_error_messages has been deprecated. Please use I18n.translate('activerecord.errors.messages').. (called from default_error_messages at /Library/Ruby/Gems/1.8/gems/activerecord-2.3.4/lib/active_record/validations.rb:131)
+
+when validates_role_name is used in the User model.
+
+
+
+
+== ToDo
+
+Testing.
+
+Include the other mods that I've made locally.
+
+
+
+== Further Information
+
+{Aegis Permissions on GitHub}[http://github.com/makandra/aegis]
+
+
