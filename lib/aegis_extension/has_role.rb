@@ -1,5 +1,5 @@
-module Aegis
-	module HasRoleExtension
+module AegisExtension
+	module HasRole
 		def validates_role_name(options = {})
 			validates_each :role_name do |record, attr, value|
 #				options[:message] ||= ActiveRecord::Errors.default_error_messages[:inclusion]

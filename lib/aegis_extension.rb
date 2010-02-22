@@ -1,2 +1,2 @@
 # AegisExtension
-require 'aegis/has_role_extension'
+require 'aegis_extension/has_role'

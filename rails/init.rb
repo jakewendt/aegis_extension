@@ -4,5 +4,5 @@ require 'aegis_extension'
  
 ActiveRecord::Base.class_eval do
 	#	override validates_role_name
-  extend Aegis::HasRoleExtension
+  extend AegisExtension::HasRole
 end
