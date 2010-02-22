@@ -7,4 +7,5 @@ ActiveRecord::Base.class_eval do
   extend AegisExtension::HasRole
 end
 Aegis::Permissions.send(:include, AegisExtension::Permissions )
+ActionController::Base.send(:include, AegisExtension::ActionController )
 
