@@ -6,7 +6,10 @@ This rails plugin includes modifications to the Aegis gem.
 
 Rails 2.3.4 throws 
 
- DEPRECATION WARNING: ActiveRecord::Errors.default_error_messages has been deprecated. Please use I18n.translate('activerecord.errors.messages').. (called from default_error_messages at /Library/Ruby/Gems/1.8/gems/activerecord-2.3.4/lib/active_record/validations.rb:131)
+ DEPRECATION WARNING: ActiveRecord::Errors.default_error_messages has been deprecated. 
+ Please use I18n.translate('activerecord.errors.messages').. 
+ (called from default_error_messages at /Library/Ruby/Gems/1.8/gems/activerecord-2.3.4
+ /lib/active_record/validations.rb:131)
 
 when validates_role_name is used in the User model.
 
