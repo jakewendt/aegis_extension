@@ -14,6 +14,18 @@ Fix for when Rails 2.3.4 throws
 when validates_role_name is used in the User model.
 
 
+Added ...
+
+ Permissions.permission_names
+
+which returns @permission_blocks.keys
+
+Added ...
+
+ Permissions.exists?(permission)
+
+which returns the obvious boolean as to whether or not the permission has actually been defined and exists in the Permissions.permission_name array.
+
 
 
 == ToDo
