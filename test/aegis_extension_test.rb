@@ -1,5 +1,4 @@
 require 'test/unit'
-require 'test/unit/testcase'
 require 'rubygems'
 require 'active_record'
 require 'action_controller'
@@ -8,27 +7,6 @@ require 'aegis'
 require File.dirname(__FILE__) + '/../init'
 
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
-
-#	Why was this deprecated?
-#	Why does it still work in rails?
-#	Where did it go?
-class Test::Unit::TestCase
-	# test "verify something" do
-	#   ...
-	# end
-	def self.test(name, &block)
-		test_name = "test_#{name.gsub(/\s+/,'_')}".to_sym
-		defined = instance_method(test_name) rescue false
-		raise "#{test_name} is already defined in #{self}" if defined
-		if block_given?
-			define_method(test_name, &block)
-		else
-			define_method(test_name) do
-				flunk "No implementation provided for #{name}"
-			end
-		end
-	end
-end
 
 def setup_db
 	ActiveRecord::Schema.define(:version => 1) do
@@ -79,7 +57,7 @@ class Permissions < Aegis::Permissions
 	end
 end
 
-class AegisExtensionTest < Test::Unit::TestCase
+class AegisExtensionTest < ActiveSupport::TestCase
 
 	def setup
 		setup_db
