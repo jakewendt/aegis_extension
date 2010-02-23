@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
 	before_filter :id_required, :only => [ :edit, :update, :destroy, :show ]
-	before_filter :may_edit_post_required, :only => [ :edit, :update ]
+	before_filter :may_update_post_required, :only => [ :edit, :update ]
 	before_filter :may_destroy_post_required, :only => [ :destroy ]
 
 	def new

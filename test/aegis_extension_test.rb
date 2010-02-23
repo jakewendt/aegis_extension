@@ -55,8 +55,20 @@ class AegisExtensionTest < ActiveSupport::TestCase
 		assert !u.may_destroy_post?(post)
 	end
 
-	test "asdf" do
+	test "permission exists" do
+		assert ::Permissions.exists?(:moderate)
+		assert ::Permissions.exists?(:administrate)
+		assert ::Permissions.exists?(:create_post)
+		assert ::Permissions.exists?(:update_post)
+		assert ::Permissions.exists?(:destroy_post)
+	end
 
+	test "permission_names includes permissions" do
+		assert ::Permissions.permission_names.include?(:moderate)
+		assert ::Permissions.permission_names.include?(:administrate)
+		assert ::Permissions.permission_names.include?(:create_post)
+		assert ::Permissions.permission_names.include?(:update_post)
+		assert ::Permissions.permission_names.include?(:destroy_post)
 	end
 
 end
