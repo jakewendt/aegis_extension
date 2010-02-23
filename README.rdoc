@@ -59,10 +59,6 @@ Also just added negated before filters.  Not real sure how well this'll work, bu
 
 I don't see a lot of demand for this so it may have been simply a programming exercise.  Linguistically, "must_not_be_user_required" sounds better as does "must_be_user_required."  "May" sounds too passive.  "Must" sounds more demanding.  Of course, the trailing "required" is then redundant.
 
-== ToDo
-
-Testing.
-
 == Further Information
 
 {Aegis Permissions on GitHub}[http://github.com/makandra/aegis]
