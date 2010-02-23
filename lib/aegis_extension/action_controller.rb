@@ -41,17 +41,11 @@ module AegisExtension
 		
 					#	using target words where singular == plural won't work here
 					if !target.blank? && target == target.singularize
-#						unless aegis_current_user.try("may_#{permission_name}?", instance_variable_get("@#{target}") )
-#							aegis_access_denied "You don't have permission to #{verb} this #{target}."
-#						end
 						unless permission = aegis_current_user.try("may_#{permission_name}?", instance_variable_get("@#{target}") )
 							message = "You don't have permission to #{verb} this #{target}."
 						end
 					else
 						#	current_user may be nil so must use try and NOT send
-#						unless aegis_current_user.try("may_#{permission_name}?")
-#							aegis_access_denied "You don't have permission to #{permission_name.gsub(/_/,' ')}."
-#						end
 						unless permission = aegis_current_user.try("may_#{permission_name}?")
 							message = "You don't have permission to #{permission_name.gsub(/_/,' ')}."
 						end
@@ -59,7 +53,7 @@ module AegisExtension
 
 					#	exclusive or
 					unless negate ^ permission
-						aegis_access_denied message
+						aegis_access_denied message||"Access denied."
 					end
 
 				else
