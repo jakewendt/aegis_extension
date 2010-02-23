@@ -16,8 +16,26 @@ class PostsControllerTest < ActionController::TestCase
 		teardown_db
 	end
 
-	test "anyone can get new" do
+	test "anyone can view post index" do
+		get :index
+		assert_response :success
+	end
+
+	test "anyone can view post" do
+		p = Post.create(:user_id => User.create.id)
+		get :show, :id => p.id
+		assert_response :success
+	end
+
+	test "logged in user can get new post" do
+		login_as User.create
 		get :new
+		assert_response :success
+	end
+
+	test "guest can NOT create new post" do
+		get :new
+		assert_response :redirect
 	end
 
 	test "owner can edit" do
@@ -32,6 +50,21 @@ class PostsControllerTest < ActionController::TestCase
 		login_as User.create
 		p = Post.create(:user_id => User.create.id)
 		get :edit, :id => p.id
+		assert_response :redirect
+	end
+
+	test "owner can destroy" do
+		u = User.create
+		login_as u
+		p = Post.create(:user_id => u.id)
+		delete :destroy, :id => p.id
+		assert_response :success
+	end
+
+	test "non-owner cannot destroy" do
+		login_as User.create
+		p = Post.create(:user_id => User.create.id)
+		delete :destroy, :id => p.id
 		assert_response :redirect
 	end
 

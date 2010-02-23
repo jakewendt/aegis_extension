@@ -46,8 +46,12 @@ class Permissions < Aegis::Permissions
 	permission :moderate do
 		allow :moderator
 	end
-	permission :create_post, :read_post do
+	permission :read_post do
 		allow :everyone
+	end
+	permission :create_post do
+		allow :user
+		allow :moderator
 	end
 	permission :update_post, :destroy_post do |current_user,post|
 		allow :user do
@@ -72,7 +76,7 @@ class ActiveSupport::TestCase
 			when user.is_a?(Integer) then user
 			when user.is_a?(String)  then user
 			when user.is_a?(User)    then user.id
-			else 1
+			else nil
 		end
 	end
 
