@@ -76,7 +76,7 @@ Devise a way for the user to control access denied redirects and perhaps message
 
 == RDOC testing
 
-1. this is a list with three paragraphs in
+#. this is a list with three paragraphs in
   the first item. This is the first paragraph.
 
   And this is the second paragraph.
@@ -89,5 +89,5 @@ Devise a way for the user to control access denied redirects and perhaps message
 
     This should be in a code box.
 
-1. This is the second item in the original list
+#. This is the second item in the original list
 
