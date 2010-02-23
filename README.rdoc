@@ -11,7 +11,7 @@ current_user method is also assumed to exist and is used in the action_controlle
 
 == What modifications?
 
-# Fix for when Rails 2.3.4 throws 
+* Fix for when Rails 2.3.4 throws 
 
  DEPRECATION WARNING: ActiveRecord::Errors.default_error_messages has been deprecated. 
  Please use I18n.translate('activerecord.errors.messages').. 
@@ -21,7 +21,7 @@ current_user method is also assumed to exist and is used in the action_controlle
 when validates_role_name is used in the User model.
 
 
-# Added ...
+* Added ...
 
  Permissions.permission_names
 
