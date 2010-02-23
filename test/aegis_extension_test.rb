@@ -1,61 +1,4 @@
-require 'test/unit'
-require 'rubygems'
-require 'active_record'
-require 'action_controller'
-require 'active_support/test_case'
-require 'aegis'
-require File.dirname(__FILE__) + '/../init'
-
-ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
-
-def setup_db
-	ActiveRecord::Schema.define(:version => 1) do
-		create_table :users do |t|
-			t.string :name
-			t.string :role_name
-			t.timestamps
-		end
-		create_table :posts do |t|
-			t.references :user
-			t.string :title
-			t.text   :body
-			t.timestamps
-		end
-	end
-end
-
-def teardown_db
-	ActiveRecord::Base.connection.tables.each do |table|
-		ActiveRecord::Base.connection.drop_table(table)
-	end
-end
-
-
-class User < ActiveRecord::Base
-	has_many :posts
-	has_role :default => :user
-	validates_role_name
-end
-
-class Post < ActiveRecord::Base
-	belongs_to :user
-end
-
-class Permissions < Aegis::Permissions
-	role :user
-	role :moderator
-	role :administrator, :default_permission => :allow
-	permission :administrate do
-	end
-	permission :moderate do
-		allow :moderator
-	end
-	permission :crud_post do |user,post|
-		allow :user do
-			user == post.user
-		end
-	end
-end
+require File.dirname(__FILE__) + '/test_helper'
 
 class AegisExtensionTest < ActiveSupport::TestCase
 
@@ -67,11 +10,52 @@ class AegisExtensionTest < ActiveSupport::TestCase
 		teardown_db
 	end
 
-	def test_the_truth
-		assert true
+	test "user may create a post" do
+		assert User.new.may_create_post?
 	end
 
-	test "new test style" do
+	test "user may view a post" do
+		assert User.new.may_read_post?
+		assert User.new.may_view_post?
+	end
+
+	test "post owner may edit post" do
+		u = User.create
+		u.posts << Post.create
+		assert u.may_edit_post?(u.posts.first)
+	end
+
+	test "post owner may update post" do
+		u = User.create
+		u.posts << Post.create
+		assert u.may_update_post?(u.posts.first)
+	end
+
+	test "post owner may destroy post" do
+		u = User.create
+		u.posts << Post.create
+		assert u.may_destroy_post?(u.posts.first)
+	end
+
+	test "post non-owner may NOT edit post" do
+		post = Post.create
+		u = User.create
+		assert !u.may_edit_post?(post)
+	end
+
+	test "post non-owner may NOT update post" do
+		post = Post.create
+		u = User.create
+		assert !u.may_update_post?(post)
+	end
+
+	test "post non-owner may NOT destroy post" do
+		post = Post.create
+		u = User.create
+		assert !u.may_destroy_post?(post)
+	end
+
+	test "asdf" do
 
 	end
 
