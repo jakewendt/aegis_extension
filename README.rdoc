@@ -6,6 +6,9 @@ This rails plugin includes modifications to the Aegis gem.
 
 It is initially assumed that there is only ONE subclass of Aegis::Permissions and its name is Permissions (ie. ::Permissions).  I don't know why someone would have more, but I'm sure that there is a reason.  If you do, aegis_extension/action_controller.rb may need modified or removed to suit your needs as it uses ::Permissions.exists?
 
+current_user method is also assumed to exist and is used in the action_controller method_missing.
+
+
 == What modifications?
 
 Fix for when Rails 2.3.4 throws 

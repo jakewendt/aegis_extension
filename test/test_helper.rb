@@ -3,7 +3,6 @@ require 'rubygems'
 require 'active_record'
 require 'action_controller'
 require 'action_controller/test_case'
-require 'active_support'
 require 'active_support/test_case'
 require 'aegis'
 require File.dirname(__FILE__) + '/../init'
@@ -55,4 +54,26 @@ class Permissions < Aegis::Permissions
 			current_user == post.user
 		end
 	end
+end
+
+class ActiveSupport::TestCase
+
+	def active_user(options={})
+		User.create(options)
+	end
+
+	def admin_user(options={})
+		u = active_user(options.merge(:role_name => "administrator"))
+		u
+	end
+
+	def login_as( user=nil )
+		@request.session[:user_id] = case 
+			when user.is_a?(Integer) then user
+			when user.is_a?(String)  then user
+			when user.is_a?(User)    then user.id
+			else 1
+		end
+	end
+
 end
