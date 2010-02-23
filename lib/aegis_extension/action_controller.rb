@@ -11,6 +11,12 @@ module AegisExtension
 				current_user
 			end
 
+			def aegis_access_denied(message="Access Denied.")
+				flash[:error] = message
+				redirect_to( session[:refer_to] || request.env["HTTP_REFERER"] || "/" )
+				session[:refer_to] = nil
+			end
+
 
 
 			#	This works when the permission does not take an argument.
@@ -35,18 +41,17 @@ module AegisExtension
 					#	using target words where singular == plural won't work here
 					if !target.blank? && target == target.singularize
 						unless aegis_current_user.try("may_#{permission}?", instance_variable_get("@#{target}") )
-							flash[:error] = "You don't have permission to #{verb} this #{target}."
-							redirect_to( session[:refer_to] || request.env["HTTP_REFERER"] || "/" )
-							session[:refer_to] = nil
+							aegis_access_denied "You don't have permission to #{verb} this #{target}."
 						end
 					else
 						#	current_user may be nil so must use try and NOT send
 						unless aegis_current_user.try("may_#{permission}?")
-							flash[:error] = "You don't have permission to #{permission.gsub(/_/,' ')}."
-							redirect_to( session[:refer_to] || request.env["HTTP_REFERER"] || "/" )
-							session[:refer_to] = nil
+							aegis_access_denied "You don't have permission to #{permission.gsub(/_/,' ')}."
 						end
 					end
+
+
+
 				else
 					method_missing_without_aegis_permissions(symb, *args)
 				end
