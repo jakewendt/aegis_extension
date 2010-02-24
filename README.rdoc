@@ -20,6 +20,8 @@ Fix for when Rails 2.3.4 throws
 
 when validates_role_name is used in the User model.
 
+UPDATE: This patch is included in the latest gem.
+
 ---
 
 Added ...
