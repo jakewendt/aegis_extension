@@ -11,6 +11,10 @@ current_user method is also assumed to exist and is used in the action_controlle
 
 == What modifications?
 
+Added options reader to Aegis::Role.  initialize accepts it, but the developer never has access to it.  I'd like to pass :position so that I can sort my roles based on something other than randomness.
+
+---
+
 Fix for when Rails 2.3.4 throws 
 
  DEPRECATION WARNING: ActiveRecord::Errors.default_error_messages has been deprecated. 
@@ -20,7 +24,7 @@ Fix for when Rails 2.3.4 throws
 
 when validates_role_name is used in the User model.
 
-UPDATE: This patch is included in the latest gem.
+UPDATE: This patch is included in the latest gem but I haven't removed it.
 
 ---
 
