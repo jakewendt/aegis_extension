@@ -7,6 +7,8 @@ module AegisExtension
 			base.send(:include, InstanceMethods)
 			#	initialize is special and I could't seem
 			#	to override as a class or instance method
+#	Thanks to ...
+#	http://pivotallabs.com/users/rolson/blog/articles/1162-redefine-a-method-from-a-module-like-a-gentleman
 			base.class_eval do
 				alias_method :original_initialize, :initialize
 				def initialize(name, permissions, options)
