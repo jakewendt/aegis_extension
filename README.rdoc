@@ -44,19 +44,23 @@ UPDATE: This patch is included in the latest gem but I haven't removed it.
 
 ---
 
-Added ...
+Added Permissions.permission_names which returns @permission_blocks.keys
 
- Permissions.permission_names
+ >> Permissions.permission_names.collect(&:to_s).sort
+ => ["create_address", "create_addresses", "destroy_address", "destroy_addresses", "maintain_page", "maintain_pages", "read_address", "read_addresses", "read_calendar", "read_package", "read_packages", "read_user", "read_users", "update_address", "update_addresses"]
 
-which returns @permission_blocks.keys
 
 ---
 
-Added ...
+Added Permissions.exists?(permission) which returns the obvious boolean as to whether or not the permission has actually been defined and exists in the Permissions.permission_name array.  "permission" will be "normalized" before being tested.
 
- Permissions.exists?(permission)
+ >> Permissions.permission_names.collect(&:to_s).sort
+ => ["create_address", "create_addresses", "destroy_address", "destroy_addresses", "maintain_page", "maintain_pages", "read_address", "read_addresses", "read_calendar", "read_package", "read_packages", "read_user", "read_users", "update_address", "update_addresses"]
+ >> Permissions.exists?(:view_users)
+ => true
+ >> Permissions.exists?(:read_users)
+ => true
 
-which returns the obvious boolean as to whether or not the permission has actually been defined and exists in the Permissions.permission_name array.
 
 ---
 
