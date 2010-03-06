@@ -61,7 +61,6 @@ Added Permissions.exists?(permission) which returns the obvious boolean as to wh
  >> Permissions.exists?(:read_users)
  => true
 
-
 ---
 
 Added dynamically 'created' before_filters based on naming conventions by adding a method_missing method.  This is still in development and, due to some natural english usage, may never be perfect.  The purpose being that using a before_filter that matches /^may_(.+)_required$/ like ...
