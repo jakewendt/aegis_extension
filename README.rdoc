@@ -11,7 +11,7 @@ current_user method is also assumed to exist and is used in the action_controlle
 
 == What modifications?
 
-Added attr_reader for the options passed to new Aegis::Roles.  The initialize method accepts it, but the developer never has access to it.  I'd like to pass :position so that I can sort my roles based on something other than randomness.  I found this useful for viewing user profiles and assigning the user's role.
+Added attr_reader for the options passed to new Aegis::Roles.  The initialize method accepts it, but the developer never has access to it.  I'd like to pass :position so that I can sort my roles based on something other than randomness.  I found this useful for viewing user profiles and assigning the user's role.  I had considered assigning a value based on the order which the roles were called, but opted against it.
 
  class Permissions < Aegis::Permissions
   role :user, :position => 1	#	default value for User.new
