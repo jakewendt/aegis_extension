@@ -7,6 +7,14 @@ module AegisExtension
 
 		module InstanceMethods
 
+			def aegis_redirections(permission_name)
+				if redirections.is_a?(Hash)
+					redirections[permission_name]
+				else
+					HashWithIndifferentAccess.new
+				end
+			end
+
 			def aegis_current_user
 				current_user
 			end
