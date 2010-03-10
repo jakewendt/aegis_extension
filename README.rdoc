@@ -31,19 +31,6 @@ Added attr_reader for the options passed to new Aegis::Roles.  The initialize me
 
 ---
 
-Fix for when Rails 2.3.4 throws 
-
- DEPRECATION WARNING: ActiveRecord::Errors.default_error_messages has been deprecated. 
- Please use I18n.translate('activerecord.errors.messages').. 
- (called from default_error_messages at /Library/Ruby/Gems/1.8/gems/activerecord-2.3.4
- /lib/active_record/validations.rb:131)
-
-when validates_role_name is used in the User model.
-
-UPDATE: This patch is included in the latest gem but I haven't removed it.
-
----
-
 Added Permissions.permission_names which returns @permission_blocks.keys
 
  >> Permissions.permission_names.collect(&:to_s).sort
@@ -97,4 +84,6 @@ Devise a way for the user to control access denied redirects and perhaps message
 == Further Information
 
 {Aegis Permissions on GitHub}[http://github.com/makandra/aegis]
+
+http://github.com/makandra/aegis/commit/691083a0513e1901ccca87ee846e5923fdeb4fb6
 
