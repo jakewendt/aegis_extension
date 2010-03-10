@@ -8,8 +8,10 @@ module AegisExtension
 		module InstanceMethods
 
 			def aegis_redirections(permission_name)
-				if self.respond_to?(:redirections) && self.redirections.is_a?(Hash)
-					redirections[permission_name] || HashWithIndifferentAccess.new
+				if respond_to?(:redirections) && 
+					redirections.is_a?(Hash) &&
+					!redirections[permission_name].blank?
+					redirections[permission_name]
 				else
 					HashWithIndifferentAccess.new
 				end
