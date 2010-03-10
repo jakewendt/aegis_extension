@@ -85,5 +85,5 @@ Devise a way for the user to control access denied redirects and perhaps message
 
 {Aegis Permissions on GitHub}[http://github.com/makandra/aegis]
 
-http://github.com/makandra/aegis/commit/691083a0513e1901ccca87ee846e5923fdeb4fb6
+http://github.com/makandra/aegis/commit/691083a0513e1901ccca87ee846e5923fdeb4fb6 fixed the need for the validates_role_name override.
 
