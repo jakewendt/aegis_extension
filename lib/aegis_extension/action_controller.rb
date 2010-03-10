@@ -8,8 +8,8 @@ module AegisExtension
 		module InstanceMethods
 
 			def aegis_redirections(permission_name)
-				if redirections.is_a?(Hash)
-					redirections[permission_name]
+				if self.respond_to?(:redirections) && self.redirections.is_a?(Hash)
+					redirections[permission_name] || HashWithIndifferentAccess.new
 				else
 					HashWithIndifferentAccess.new
 				end
@@ -42,6 +42,7 @@ module AegisExtension
 #	Aegis::Permissions.subclasses.collect{|p| "::#{p}".constantize.exists?($1)}.any?
 		
 				if method_name =~ /^may_(not_)?(.+)_required$/ && ::Permissions.exists?($2)
+					full_permission_name = "#{$1}#{$2}"
 					negate = !!$1		#	double bang converts to boolean
 					permission_name = $2
 					verb,target = permission_name.split(/_/,2)
@@ -65,7 +66,14 @@ module AegisExtension
 					unless negate ^ permission
 						#	if message is nil, negate will be true
 						message ||= "Access denied.  May #{(negate)?'not ':''}#{permission_name.gsub(/_/,' ')}."
-						aegis_access_denied message||"Access denied."
+#						aegis_access_denied message||"Access denied."
+#				flash[:error] = message
+#				redirect_to( session[:refer_to] || request.env["HTTP_REFERER"] || "/" )
+#				session[:refer_to] = nil
+
+						flash[:error] = aegis_redirections(full_permission_name)[:message] || message
+						redirect_to aegis_redirections(full_permission_name)[:redirect_to] || "/"
+						
 					end
 
 				else
