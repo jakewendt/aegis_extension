@@ -72,6 +72,7 @@ module AegisExtension
 #				flash[:error] = message
 #				redirect_to( session[:refer_to] || request.env["HTTP_REFERER"] || "/" )
 #				session[:refer_to] = nil
+						session[:aegis_return_to] = request.request_uri
 
 						flash[:error] = aegis_redirections(full_permission_name)[:message] || message
 						redirect_to aegis_redirections(full_permission_name)[:redirect_to] || "/"
